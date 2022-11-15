@@ -1,0 +1,32 @@
+.controls {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  padding: 20px;
+}
+.slides {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px 0;
+}
+.divider {
+  height: 1px;
+  width: 100%;
+  background-color: gray;
+}
+button {
+  cursor: pointer;
+  margin-top: 20px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: large;
+}
+label {
+  color: white;
+  font-size: 20px;
+}
+input {
+  cursor: pointer;
+}
