@@ -1,5 +1,5 @@
 import { FractalService } from './../../core/service/fractal.service';
-import { map } from 'rxjs';
+import { delay, map } from 'rxjs';
 import { FractalState } from './../../core/model/fractal-state';
 import { Component } from '@angular/core';
 
@@ -11,8 +11,9 @@ import { Component } from '@angular/core';
 export class ControlsComponent {
 
   public state$ = this.fractalService.getFractal().pipe(
+    delay(10),
     map(fractal => <FractalState> {
-      lineWidth: fractal?.lineWidth ?? 1,
+      lineWidth: fractal?.lineWidth ?? 10,
       sides: fractal?.sides ?? 3,
       scale: fractal?.scale ?? 0.5,
       angle: Math.floor((fractal?.angle ?? 1) * 180 / Math.PI),
@@ -54,7 +55,6 @@ export class ControlsComponent {
   setAngle(target: EventTarget | null): void {
     let newValue = Number((target as HTMLInputElement).value);
     if (newValue) {
-      console.log(newValue, newValue * Math.PI / 180);
       this.fractalService.setAngle((newValue - 1) * Math.PI / 180);
     }
   }

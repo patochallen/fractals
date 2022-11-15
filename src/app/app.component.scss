@@ -1,6 +1,14 @@
-:host {
+.container {
   display: flex;
   height: 100%;
-  align-items: center;
-  justify-content: center;
+  background-color: black;
+}
+.divider {
+  width: 2px;
+  height: 100%;
+  background-color: gray;
+}
+.canvas {
+  flex: 1;
+  overflow: hidden;
 }
