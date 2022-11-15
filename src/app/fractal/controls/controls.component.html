@@ -22,7 +22,7 @@
   <div class="divider"></div>
   <div class="slides">
     <label for="deept">Deept: {{ (state$ | async)?.deept }}</label>
-    <input type="range" (input)="setMaxDeept($event.target)" id="deept" min="1" max="5" step="1" [value]="(state$ | async)?.deept">
+    <input type="range" (input)="setMaxDeept($event.target)" id="deept" min="1" max="4" step="1" [value]="(state$ | async)?.deept">
   </div>
   <div class="divider"></div>
   <div class="slides">
