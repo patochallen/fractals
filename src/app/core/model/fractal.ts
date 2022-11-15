@@ -14,7 +14,7 @@ export class Fractal {
     width: number,
     height: number,
     lineWidth: number = 10,
-    sides: number = 3,
+    sides: number = 5,
     scale: number = 0.5,
     angle: number = 1,
     maxDeept: number = 4,
@@ -23,7 +23,7 @@ export class Fractal {
   ) {
     this.width = width;
     this.height = height;
-    this.size = (this.width > this.height) ? this.height * 0.25 : this.width * 0.25;
+    this.size = Math.floor((width > height ? height : width) / 5);
     this.lineWidth = lineWidth;
     this.sides = sides;
     this.scale = scale;
@@ -46,16 +46,16 @@ export class Fractal {
   }
 
   private drawFractal(ctx: CanvasRenderingContext2D) {
-      ctx.save();
-      ctx.strokeStyle = this.color
-      ctx.translate(this.width / 2, this.height / 2);
-      ctx.scale(1, 1);
-      ctx.rotate(0);
-      for (let i = 0; i < this.sides; i++) {
-          ctx.rotate((Math.PI * 2) / this.sides)
-          this.drawBranch(ctx, 0);
-      }
-      ctx.restore();
+    ctx.save();
+    ctx.strokeStyle = this.color;
+    ctx.translate(this.width / 2, this.height / 2);
+    ctx.scale(1, 1);
+    ctx.rotate(0);
+    for (let i = 0; i < this.sides; i++) {
+      ctx.rotate((Math.PI * 2) / this.sides);
+      this.drawBranch(ctx, 0);
+    }
+    ctx.restore();
   }
 
   private drawBranch(ctx: CanvasRenderingContext2D, deept: number) {
@@ -65,21 +65,21 @@ export class Fractal {
     ctx.lineTo(this.size, 0);
     ctx.stroke();
     for (let i = 0; i < this.branches; i++) {
-        ctx.save();
-        ctx.translate(this.size - (this.size / this.branches) * i, 0);
-        ctx.scale(this.scale, this.scale);
+      ctx.save();
+      ctx.translate(this.size - (this.size / this.branches) * i, 0);
+      ctx.scale(this.scale, this.scale);
 
-        ctx.save();
-        ctx.rotate(this.angle);
-        this.drawBranch(ctx, deept + 1);
-        ctx.restore();
+      ctx.save();
+      ctx.rotate(this.angle);
+      this.drawBranch(ctx, deept + 1);
+      ctx.restore();
 
-        ctx.save();
-        ctx.rotate(-this.angle);
-        this.drawBranch(ctx, deept + 1);
-        ctx.restore();
+      ctx.save();
+      ctx.rotate(-this.angle);
+      this.drawBranch(ctx, deept + 1);
+      ctx.restore();
 
-        ctx.restore();
+      ctx.restore();
     }
   }
 }

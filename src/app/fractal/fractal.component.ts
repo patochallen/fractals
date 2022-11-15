@@ -7,10 +7,6 @@ import { AfterViewInit, Component, ElementRef, OnInit } from '@angular/core';
 })
 export class FractalComponent implements OnInit, AfterViewInit {
 
-  private context: CanvasRenderingContext2D | null = null;
-
-  private fractal$ = this.fractalService.getFractal();
-
   public width: number = window.innerWidth;
 
   public height: number = window.innerHeight;
@@ -18,19 +14,16 @@ export class FractalComponent implements OnInit, AfterViewInit {
   constructor(
     private fractalService: FractalService,
     private elementRef: ElementRef
-  ) {
-    this.fractal$.subscribe(fractal => {
-      if (fractal && this.context) fractal.draw(this.context)
-    })
-  }
+  ) {}
 
   ngOnInit(): void {
     this.width = this.elementRef?.nativeElement?.offsetWidth;
     this.height = this.elementRef?.nativeElement?.offsetHeight;
+    this.fractalService.createFractal(this.width, this.height);
   }
 
   ngAfterViewInit(): void {
-    this.context = this.elementRef?.nativeElement?.firstChild?.transferControlToOffscreen()?.getContext('2d');
-    this.fractalService.createFractal(this.width, this.height);
+    const context = this.elementRef?.nativeElement?.firstChild?.transferControlToOffscreen()?.getContext('2d');
+    this.fractalService.getFractal().subscribe(fractal => fractal?.draw(context))
   }
 }

@@ -1,5 +1,5 @@
 import { FractalService } from './../../core/service/fractal.service';
-import { delay, map } from 'rxjs';
+import { map } from 'rxjs';
 import { FractalState } from './../../core/model/fractal-state';
 import { Component } from '@angular/core';
 
@@ -11,7 +11,6 @@ import { Component } from '@angular/core';
 export class ControlsComponent {
 
   public state$ = this.fractalService.getFractal().pipe(
-    delay(10),
     map(fractal => <FractalState> {
       lineWidth: fractal?.lineWidth ?? 10,
       sides: fractal?.sides ?? 3,
