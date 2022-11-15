@@ -41,6 +41,7 @@ export class Fractal {
     ctx.shadowOffsetX = 10;
     ctx.shadowOffsetY = 5;
     ctx.shadowBlur = 10;
+    ctx.clearRect(0, 0, this.width, this.height);
     this.drawFractal(ctx);
   }
 
